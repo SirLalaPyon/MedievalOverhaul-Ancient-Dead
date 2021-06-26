@@ -12,5 +12,6 @@ namespace MedievalOverhaulAncientDead
     public static class MO_DefOf
     {
         public static ThingDef DankPyon_AncientDeadRace;
+        public static FleshTypeDef DankPyon_AncientDead;
     }
 }
