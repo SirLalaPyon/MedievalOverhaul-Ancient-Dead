@@ -51,4 +51,29 @@
     <minGenerationAge>500</minGenerationAge>
   </PawnKindDef>
 
+  <PawnKindDef>
+    <defName>DankPyon_AncientPriest</defName>
+    <label>Ancient Priest</label>
+    <race>DankPyon_AncientDeadRace</race>
+    <combatPower>55</combatPower>
+    <isFighter>true</isFighter>
+    <gearHealthRange>0.6~2</gearHealthRange>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <defaultFactionType>AncientsHostile</defaultFactionType>
+    <backstoryCategories>
+      <li>Outlander</li>
+    </backstoryCategories>
+    <apparelTags>
+      <li>AncientPriest</li>
+    </apparelTags>
+    <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
+    <apparelMoney>400~600</apparelMoney>
+    <weaponTags>
+      <li>AncientPriest</li>
+    </weaponTags>
+    <weaponMoney>250~400</weaponMoney>
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <minGenerationAge>500</minGenerationAge>
+  </PawnKindDef>
+
 </Defs>
