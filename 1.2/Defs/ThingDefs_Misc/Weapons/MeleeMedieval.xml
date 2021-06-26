@@ -13,7 +13,8 @@
     <techLevel>Medieval</techLevel>
     <costStuffCount>50</costStuffCount>
     <weaponTags>
-      <li>MedievalMeleeDecent</li>
+      <li>AncientAuxiliary</li>
+      <li>AncientLegionary</li>
     </weaponTags>
     <statBases>
       <WorkToMake>12000</WorkToMake>

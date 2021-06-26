@@ -39,12 +39,12 @@
       <li>Outlander</li>
     </backstoryCategories>
     <apparelTags>
-      <li>AncientAuxiliary</li>
+      <li>AncientLegionary</li>
     </apparelTags>
     <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
     <apparelMoney>400~600</apparelMoney>
     <weaponTags>
-      <li>AncientAuxiliary</li>
+      <li>AncientLegionary</li>
     </weaponTags>
     <weaponMoney>250~400</weaponMoney>
     <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
