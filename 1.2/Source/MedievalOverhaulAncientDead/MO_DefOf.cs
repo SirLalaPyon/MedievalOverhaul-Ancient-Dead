@@ -13,5 +13,7 @@ namespace MedievalOverhaulAncientDead
     {
         public static ThingDef DankPyon_AncientDeadRace;
         public static FleshTypeDef DankPyon_AncientDead;
+        public static DamageDef DankPyon_ToxicBurn;
+        public static ThingDef DankPyon_GreenFog;
     }
 }

@@ -74,6 +74,23 @@
     <weaponMoney>250~400</weaponMoney>
     <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
     <minGenerationAge>500</minGenerationAge>
+	<modExtensions>
+		<li Class="MedievalOverhaulAncientDead.AbilityAIController">
+			<abilityAttackOrder>Sequence</abilityAttackOrder>
+			<abilityActions>
+				<li>
+					<abilityDef>DankPyon_SummonFog</abilityDef>
+					<cooldownTicks>1200</cooldownTicks>
+					<targetDistanceRange>7~50</targetDistanceRange>
+				</li>
+				<li>
+					<abilityDef>DankPyon_Horror</abilityDef>
+					<cooldownTicks>600</cooldownTicks>
+					<targetDistanceRange>7~50</targetDistanceRange>
+				</li>
+			</abilityActions>
+		</li>
+	</modExtensions>
   </PawnKindDef>
 
 </Defs>

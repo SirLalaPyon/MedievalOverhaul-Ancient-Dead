@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  	<ThingDef ParentName="BaseGas">
+		<defName>DankPyon_GreenFog</defName>
+		<label>smoke</label>
+		<thingClass>MedievalOverhaulAncientDead.Gas_GreenFog</thingClass>
+		<graphicData>
+			<texPath>Things/Gas/Puff</texPath>
+			<drawSize>7</drawSize>
+			<color>(0,128,0)</color>
+		</graphicData>
+		<size>(7, 7)</size>
+		<pathCost>100</pathCost>
+		<passability>PassThroughOnly</passability>
+		<gas>
+			<expireSeconds>15~15</expireSeconds>
+			<blockTurretTracking>true</blockTurretTracking>
+			<accuracyPenalty>0.7</accuracyPenalty>
+			<rotationSpeed>10</rotationSpeed>
+		</gas>
+	</ThingDef>
+
+  <DamageDef ParentName="Flame">
+    <defName>DankPyon_ToxicBurn</defName>
+    <label>toxic burn</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <hediff>DankPyon_ToxicBurn</hediff>
+  </DamageDef>
+  
+    <HediffDef ParentName="InjuryBase">
+    <defName>DankPyon_ToxicBurn</defName>
+    <label>toxic burn</label>
+    <labelNoun>a toxic burn</labelNoun>
+    <description>A toxic burn.</description>
+    <comps>
+      <li Class="HediffCompProperties_TendDuration">
+        <labelTendedWell>bandaged</labelTendedWell>
+        <labelTendedWellInner>tended</labelTendedWellInner>
+        <labelSolidTendedWell>tended</labelSolidTendedWell>
+      </li>
+      <li Class="HediffCompProperties_Infecter">
+        <infectionChance>0.30</infectionChance>
+      </li>
+      <li Class="HediffCompProperties_GetsPermanent">
+        <permanentLabel>toxic burn scar</permanentLabel>
+      </li>
+    </comps>
+    <injuryProps>
+      <painPerSeverity>0.01875</painPerSeverity>
+      <averagePainPerSeverityPermanent>0.00625</averagePainPerSeverityPermanent>
+      <canMerge>true</canMerge>
+      <destroyedLabel>Burned off</destroyedLabel>
+      <destroyedOutLabel>Burned out</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+</Defs>

@@ -17,6 +17,30 @@ namespace MedievalOverhaulAncientDead
         {
             harmony = new Harmony("MedievalOverhaulAncientDead.Mod");
             harmony.PatchAll();
+            foreach (var humanlike in DefDatabase<ThingDef>.AllDefs.Where(x => x.race?.Humanlike ?? false))
+            {
+                if (humanlike.comps is null)
+                {
+                    humanlike.comps = new List<CompProperties>();
+                }
+                humanlike.comps.Add(new CompProperties_AIAbility());
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Pawn), "TryGetAttackVerb")]
+    public static class Patch_TryGetAttackVerb
+    {
+        public static void Postfix(Pawn __instance, Thing target, bool allowManualCastWeapons = false)
+        {
+            var comp = __instance.TryGetComp<CompAIAbility>();
+            if (comp != null)
+            {
+                if (comp.TryGetAbilityToPerformOn(target, out var ability))
+                {
+                    comp.UseAbilityOn(ability, target);
+                }
+            }
         }
     }
 
