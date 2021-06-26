@@ -29,9 +29,9 @@
 
 	<AbilityDef ParentName="DankPyon_SkeletonAbilityBase">
 		<defName>DankPyon_SummonFog</defName>
-		<label>summon fog</label>
-		<description>summon fog</description>
-		<iconPath>Abilities/SummonFog</iconPath>
+		<label>summon miasma</label>
+		<description>summon miasma</description>
+		<iconPath>Abilities/SummonMiasma</iconPath>
 		<verbProperties>
 			<warmupTime>0.1</warmupTime>
 		</verbProperties>
