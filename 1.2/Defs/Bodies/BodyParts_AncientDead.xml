@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonTorso</defName>
+    <label>torso</label>
+    <hitPoints>40</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>true</skinCovered>
+    <solid>true</solid>
+    <canSuggestAmputation>false</canSuggestAmputation>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonShoulder</defName>
+    <label>shoulder</label>
+    <hitPoints>30</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>true</skinCovered>
+    <solid>true</solid>
+    <tags>
+      <li>ManipulationLimbSegment</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonArm</defName>
+    <label>arm</label>
+    <hitPoints>30</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>true</skinCovered>
+    <solid>true</solid>
+    <tags>
+      <li>ManipulationLimbCore</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonHand</defName>
+    <label>hand</label>
+    <hitPoints>20</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>true</skinCovered>
+    <solid>true</solid>
+    <tags>
+      <li>ManipulationLimbSegment</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonFinger</defName>
+    <label>finger</label>
+    <hitPoints>8</hitPoints>
+    <pawnGeneratorCanAmputate>true</pawnGeneratorCanAmputate>
+    <bleedRate>0</bleedRate>
+    <skinCovered>true</skinCovered>
+    <solid>true</solid>
+    <tags>
+      <li>ManipulationLimbDigit</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonWaist</defName>
+    <label>waist</label>
+    <conceptual>true</conceptual>
+    <bleedRate>0</bleedRate>
+    <solid>true</solid>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonToe</defName>
+    <label>toe</label>
+    <hitPoints>8</hitPoints>
+    <pawnGeneratorCanAmputate>true</pawnGeneratorCanAmputate>
+    <skinCovered>true</skinCovered>
+    <bleedRate>0</bleedRate>
+    <solid>true</solid>
+    <tags>
+      <li>MovingLimbDigit</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonNeck</defName>
+    <label>neck</label>
+    <hitPoints>25</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>true</skinCovered>
+    <solid>true</solid>
+    <tags>
+      <li>TalkingPathway</li>
+    </tags>
+    <canSuggestAmputation>false</canSuggestAmputation>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonLeg</defName>
+    <label>leg</label>
+    <hitPoints>30</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>true</skinCovered>
+    <solid>true</solid>
+    <tags>
+      <li>MovingLimbCore</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>DankPyon_SkeletonFoot</defName>
+    <label>foot</label>
+    <hitPoints>25</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>true</skinCovered>
+    <solid>true</solid>
+    <tags>
+      <li>MovingLimbSegment</li>
+    </tags>
+  </BodyPartDef>
+
+</Defs>
