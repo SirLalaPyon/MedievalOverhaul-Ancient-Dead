@@ -1,73 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
+
   <AlienRace.ThingDef_AlienRace ParentName="BasePawn">
     <defName>DankPyon_AncientDeadRace</defName>
     <label>Ancient Dead</label>
     <description>PLACEHOLDER Many hundred years ago, in a different era, an empire of man spanned much of the known world. What has fallen into ruin now, what was abandoned to nature and beast, what has long been forgotten, all this was that of man once. An empire, not of petty noble houses, but one of a dozen provinces, from the frozen tundra of the north to the blistering sands of the south, of a dozen peoples under one banner.</description>
-    <!--=============================================================================================================================-->
-    <alienRace>
-      <generalSettings>
-        <!--maleGenderProbability>0.5</maleGenderProbability-->
-        <immuneToAge>true</immuneToAge>
-        <humanRecipeImport>false</humanRecipeImport>
-        <maxDamageForSocialfight>4</maxDamageForSocialfight>
-        <alienPartGenerator>
-          <alienbodytypes>
-            <li>Thin</li>
-            <li>Male</li>
-          </alienbodytypes>
-          <aliencrowntypes>
-            <li>Average_Normal</li>
-            <li>Average_Thin</li>
-          </aliencrowntypes>
-          <useGenderedHeads>false</useGenderedHeads>
-          <useGenderedBodies>false</useGenderedBodies>
-        </alienPartGenerator>
-        <disallowedTraits>
-          <li>
-            <defName>NightOwl</defName>
-          </li>
-          <li>
-            <defName>Gourmand</defName>
-          </li>
-          <li>
-            <defName>DrugDesire</defName>
-          </li>
-        </disallowedTraits>
-      </generalSettings>
-      <!--=============================================================================================================================-->
-      <graphicPaths>
-        <li>
-          <head>Pawn/AncientDead/Heads/</head>
-          <body>Pawn/AncientDead/Bodies/</body>
-        </li>
-      </graphicPaths>
-      <!--=============================================================================================================================-->
-      <hairSettings>
-        <hasHair>false</hasHair>
-      </hairSettings>
-      <thoughtSettings>
-        <cannotReceiveThoughts>
-          <li>ObservedLayingCorpse</li>
-          <li>ObservedLayingRottingCorpse</li>
-          <li>EnvironmentDark</li>
-          <li>ApparelDamaged</li>
-          <li>DeadMansApparel</li>
-          <li>HumanLeatherApparelSad</li>
-          <li>HumanLeatherApparelHappy</li>
-          <li>EnvironmentCold</li>
-          <li>EnvironmentHot</li>
-          <li>NeedFood</li>
-          <li>NeedRest</li>
-          <li>ColonistLeftUnburied</li>
-          <li>Naked</li>
-          <li>Pain</li>
-          <li>MasochistPain</li>
-          <li>ClothedNudist</li>
-          <li>HappyNude</li>
-        </cannotReceiveThoughts>
-      </thoughtSettings>
-    </alienRace>
     <!--=============================================================================================================================-->
     <statBases>
       <MarketValue>1500</MarketValue>
@@ -131,6 +68,70 @@
         <chanceFactor>0.3</chanceFactor>
       </li>
     </tools>
+    <alienRace>
+	
+      <generalSettings>
+        <!--maleGenderProbability>0.5</maleGenderProbability-->
+        <immuneToAge>true</immuneToAge>
+        <humanRecipeImport>false</humanRecipeImport>
+        <maxDamageForSocialfight>4</maxDamageForSocialfight>
+        <alienPartGenerator>
+          <alienbodytypes>
+            <li>Thin</li>
+            <li>Male</li>
+          </alienbodytypes>
+          <aliencrowntypes>
+            <li>Average_Normal</li>
+            <li>Average_Thin</li>
+          </aliencrowntypes>
+          <useGenderedHeads>false</useGenderedHeads>
+          <useGenderedBodies>false</useGenderedBodies>
+        </alienPartGenerator>
+        <disallowedTraits>
+          <li>
+            <defName>NightOwl</defName>
+          </li>
+          <li>
+            <defName>Gourmand</defName>
+          </li>
+          <li>
+            <defName>DrugDesire</defName>
+          </li>
+        </disallowedTraits>
+      </generalSettings>
+      <!--=============================================================================================================================-->
+      <graphicPaths>
+        <li>
+          <head>Pawn/AncientDead/Heads/</head>
+          <body>Pawn/AncientDead/Bodies/</body>
+        </li>
+      </graphicPaths>
+      <!--=============================================================================================================================-->
+      <hairSettings>
+        <hasHair>false</hasHair>
+      </hairSettings>
+      <thoughtSettings>
+        <cannotReceiveThoughts>
+          <li>ObservedLayingCorpse</li>
+          <li>ObservedLayingRottingCorpse</li>
+          <li>EnvironmentDark</li>
+          <li>ApparelDamaged</li>
+          <li>DeadMansApparel</li>
+          <li>HumanLeatherApparelSad</li>
+          <li>HumanLeatherApparelHappy</li>
+          <li>EnvironmentCold</li>
+          <li>EnvironmentHot</li>
+          <li>NeedFood</li>
+          <li>NeedRest</li>
+          <li>ColonistLeftUnburied</li>
+          <li>Naked</li>
+          <li>Pain</li>
+          <li>MasochistPain</li>
+          <li>ClothedNudist</li>
+          <li>HappyNude</li>
+        </cannotReceiveThoughts>
+      </thoughtSettings>
+    </alienRace>
     <!--=============================================================================================================================-->
     <race>
       <thinkTreeMain>Humanlike</thinkTreeMain>
@@ -205,5 +206,6 @@
       <li MayRequire="Ludeon.RimWorld.Royalty">CureBloodRot</li>
       <li MayRequire="Ludeon.RimWorld.Royalty">CureAbasia</li>
     </recipes-->
-  
+    </AlienRace.ThingDef_AlienRace>
+
 </Defs>
