@@ -2,13 +2,13 @@
 <Defs>
 
   <PawnKindDef>
+    <defName>DankPyon_AncientAuxiliary</defName>
+    <label>Ancient Auxiliary</label>
     <race>DankPyon_AncientDeadRace</race>
     <combatPower>25</combatPower>
     <isFighter>true</isFighter>
     <gearHealthRange>0.6~2</gearHealthRange>
     <forceNormalGearQuality>true</forceNormalGearQuality>
-    <defName>DankPyon_AncientAuxiliary</defName>
-    <label>Ancient Auxiliary</label>
     <defaultFactionType>AncientsHostile</defaultFactionType>
     <backstoryCategories>
       <li>Outlander</li>
@@ -27,13 +27,13 @@
   </PawnKindDef>
 
   <PawnKindDef>
+    <defName>DankPyon_AncientLegionary</defName>
+    <label>Ancient Auxiliary</label>
     <race>DankPyon_AncientDeadRace</race>
     <combatPower>55</combatPower>
     <isFighter>true</isFighter>
     <gearHealthRange>0.6~2</gearHealthRange>
     <forceNormalGearQuality>true</forceNormalGearQuality>
-    <defName>DankPyon_AncientAuxiliary</defName>
-    <label>Ancient Auxiliary</label>
     <defaultFactionType>AncientsHostile</defaultFactionType>
     <backstoryCategories>
       <li>Outlander</li>
