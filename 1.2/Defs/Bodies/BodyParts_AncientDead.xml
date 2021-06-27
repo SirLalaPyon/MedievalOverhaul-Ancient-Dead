@@ -88,9 +88,9 @@
     <bleedRate>0</bleedRate>
     <skinCovered>true</skinCovered>
     <solid>true</solid>
-    <tags>
+    <!--tags>
       <li>TalkingPathway</li>
-    </tags>
+    </tags-->
     <canSuggestAmputation>false</canSuggestAmputation>
   </BodyPartDef>
 

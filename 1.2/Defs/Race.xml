@@ -14,7 +14,7 @@
 			<ComfyTemperatureMax>2000</ComfyTemperatureMax>
 			<LeatherAmount>0</LeatherAmount>
 			<MeatAmount>0</MeatAmount>
-			<Mass>30</Mass>
+			<Mass>10</Mass>
 			<WorkSpeedGlobal>0.8</WorkSpeedGlobal>
 			<ToxicSensitivity>0</ToxicSensitivity>
 			<PainShockThreshold>1</PainShockThreshold>
@@ -77,12 +77,10 @@
 				<maxDamageForSocialfight>4</maxDamageForSocialfight>
 				<alienPartGenerator>
 					<alienbodytypes>
-						<li>Thin</li>
 						<li>Male</li>
 					</alienbodytypes>
 					<aliencrowntypes>
 						<li>Average_Normal</li>
-						<li>Average_Thin</li>
 					</aliencrowntypes>
 					<useGenderedHeads>false</useGenderedHeads>
 					<useGenderedBodies>false</useGenderedBodies>
@@ -133,7 +131,7 @@
 			</thoughtSettings>
 			<compatibility>
 				<isFlesh>false</isFlesh>
-				<isSentient>true</isSentient>
+				<isSentient>false</isSentient>
 				<hasBlood>false</hasBlood>
 			</compatibility>
 		</alienRace>
@@ -147,13 +145,13 @@
 			<fleshType>DankPyon_AncientDead</fleshType>
 			<useMeatFrom>Human</useMeatFrom>
 			<useLeatherFrom>Human</useLeatherFrom>
-			<nameCategory>HumanStandard</nameCategory>
+			<!--nameCategory>HumanStandard</nameCategory-->
 			<body>DankPyon_AncientDeadBody</body>
 			<hasGenders>false</hasGenders>
 			<deathActionWorkerClass>DeathActionWorker_SmallExplosion</deathActionWorkerClass>
 			<needsRest>false</needsRest>
 			<baseBodySize>1</baseBodySize>
-			<baseHealthScale>0.9</baseHealthScale>
+			<baseHealthScale>0.6</baseHealthScale>
 			<foodType>None</foodType>
 			<gestationPeriodDays>9999</gestationPeriodDays>
 			<manhunterOnDamageChance>0.60</manhunterOnDamageChance>
@@ -220,13 +218,13 @@
 		<damageEffecter>Damage_HitFlesh</damageEffecter>
 		<wounds>
 			<li>
-				<texture>Things/Pawn/Wounds/WoundFleshA</texture>
+				<texture>Things/Pawn/Wounds/WoundA</texture>
 			</li>
 			<li>
-				<texture>Things/Pawn/Wounds/WoundFleshB</texture>
+				<texture>Things/Pawn/Wounds/WoundB</texture>
 			</li>
 			<li>
-				<texture>Things/Pawn/Wounds/WoundFleshC</texture>
+				<texture>Things/Pawn/Wounds/WoundC</texture>
 			</li>
 		</wounds>
 	</FleshTypeDef>

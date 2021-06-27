@@ -33,7 +33,7 @@
 		<description>summon miasma</description>
 		<iconPath>Abilities/SummonMiasma</iconPath>
 		<verbProperties>
-			<warmupTime>0.1</warmupTime>
+			<warmupTime>1.0</warmupTime>
 		</verbProperties>
 		<comps>
 			<li Class="CompProperties_AbilityEffectWithDuration">
@@ -48,7 +48,7 @@
 		<description>horror</description>
 		<iconPath>Abilities/Horror</iconPath>
 		<verbProperties>
-			<warmupTime>0.1</warmupTime>
+			<warmupTime>1.0</warmupTime>
 		</verbProperties>
 		<comps>
 			<li Class="CompProperties_AbilityEffectWithDuration">

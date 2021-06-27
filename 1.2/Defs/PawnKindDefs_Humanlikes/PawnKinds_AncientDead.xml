@@ -17,11 +17,11 @@
       <li>AncientAuxiliary</li>
     </apparelTags>
     <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
-    <apparelMoney>400~600</apparelMoney>
+    <apparelMoney>9999~9999</apparelMoney>
     <weaponTags>
       <li>AncientAuxiliary</li>
     </weaponTags>
-    <weaponMoney>250~400</weaponMoney>
+    <weaponMoney>9999~9999</weaponMoney>
     <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
     <minGenerationAge>500</minGenerationAge>
   </PawnKindDef>
@@ -42,11 +42,11 @@
       <li>AncientLegionary</li>
     </apparelTags>
     <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
-    <apparelMoney>400~600</apparelMoney>
+    <apparelMoney>9999~9999</apparelMoney>
     <weaponTags>
       <li>AncientLegionary</li>
     </weaponTags>
-    <weaponMoney>250~400</weaponMoney>
+    <weaponMoney>9999~9999</weaponMoney>
     <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
     <minGenerationAge>500</minGenerationAge>
   </PawnKindDef>
@@ -55,7 +55,7 @@
     <defName>DankPyon_AncientPriest</defName>
     <label>Ancient Priest</label>
     <race>DankPyon_AncientDeadRace</race>
-    <combatPower>55</combatPower>
+    <combatPower>75</combatPower>
     <isFighter>true</isFighter>
     <gearHealthRange>0.6~2</gearHealthRange>
     <forceNormalGearQuality>true</forceNormalGearQuality>
@@ -67,11 +67,11 @@
       <li>AncientPriest</li>
     </apparelTags>
     <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
-    <apparelMoney>400~600</apparelMoney>
+    <apparelMoney>9999~9999</apparelMoney>
     <weaponTags>
       <li>AncientPriest</li>
     </weaponTags>
-    <weaponMoney>250~400</weaponMoney>
+    <weaponMoney>9999~9999</weaponMoney>
     <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
     <minGenerationAge>500</minGenerationAge>
 	<modExtensions>
@@ -80,13 +80,13 @@
 			<abilityActions>
 				<li>
 					<abilityDef>DankPyon_SummonFog</abilityDef>
-					<cooldownTicks>1200</cooldownTicks>
-					<targetDistanceRange>7~50</targetDistanceRange>
+					<cooldownTicks>600</cooldownTicks>
+					<targetDistanceRange>1~30</targetDistanceRange>
 				</li>
 				<li>
 					<abilityDef>DankPyon_Horror</abilityDef>
 					<cooldownTicks>600</cooldownTicks>
-					<targetDistanceRange>7~50</targetDistanceRange>
+					<targetDistanceRange>1~30</targetDistanceRange>
 				</li>
 			</abilityActions>
 		</li>
