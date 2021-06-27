@@ -16,7 +16,7 @@ namespace MedievalOverhaulAncientDead
 			if (target.HasThing)
 			{
 				base.Apply(target, dest);
-				if (Rand.Chance(1f))
+				if (Rand.Chance(0.5f))
                 {
 					Predicate<Pawn> predicate = delegate (Pawn x)
 					{
