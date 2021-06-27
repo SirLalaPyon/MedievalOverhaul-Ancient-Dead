@@ -11,10 +11,8 @@
     </graphicData>
     <uiIconScale>1.2</uiIconScale>
     <techLevel>Medieval</techLevel>
-    <costStuffCount>50</costStuffCount>
     <weaponTags>
       <li>AncientAuxiliary</li>
-      <li>AncientLegionary</li>
     </weaponTags>
     <statBases>
       <WorkToMake>12000</WorkToMake>
@@ -54,6 +52,55 @@
       <researchPrerequisite>Smithing</researchPrerequisite>
       <skillRequirements>
         <Crafting>3</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+    <defName>DankPyon_MeleeWeapon_AncientSpear</defName>
+    <label>ancient spear</label>
+    <description>An ancient wooden spear of simple design. Time has taken its toll on this weapon.</description>
+    <graphicData>
+      <texPath>WeaponMelee/AncientSpear</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <techLevel>Neolithic</techLevel>
+    <weaponTags>
+      <li>AncientAuxiliary</li>
+    </weaponTags>
+    <costList>
+      <Steel>75</Steel>
+    </costList>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+      <Mass>2</Mass>
+    </statBases>
+    <equippedAngleOffset>-25</equippedAngleOffset>
+    <tools>
+      <li>
+        <label>shaft</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>13</power>
+        <cooldownTime>2.6</cooldownTime>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>23</power>
+        <armorPenetration>0.50</armorPenetration>
+        <cooldownTime>2.6</cooldownTime>
+      </li>
+    </tools>
+    <recipeMaker>
+      <researchPrerequisite>LongBlades</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>4</Crafting>
       </skillRequirements>
     </recipeMaker>
   </ThingDef>
