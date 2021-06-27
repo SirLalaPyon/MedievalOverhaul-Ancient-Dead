@@ -7,7 +7,7 @@
     <defName>DankPyon_AncientSarcophagus</defName>
     <label>ancient sarcophagus</label>
     <description>An ornamented burial receptacle for the honored dead.</description>
-    <thingClass>Building_Sarcophagus</thingClass>
+    <thingClass>Building_AncientCryptosleepCasket</thingClass>
     <graphicData>
       <texPath>Building/AncientSarcophagus</texPath>
       <graphicClass>Graphic_Multi</graphicClass>

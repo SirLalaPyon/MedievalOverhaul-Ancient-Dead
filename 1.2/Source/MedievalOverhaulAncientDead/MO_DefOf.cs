@@ -16,5 +16,11 @@ namespace MedievalOverhaulAncientDead
         public static DamageDef DankPyon_ToxicBurn;
         public static ThingDef DankPyon_GreenFog;
         public static MentalStateDef DankPyon_PanicFlee;
+        public static ThingDef DankPyon_Mote_ColonistFleeing;
+        public static JobDef DankPyon_Flee;
+        public static ThingDef DankPyon_AncientSarcophagus;
+        public static PawnKindDef DankPyon_AncientAuxiliary;
+        public static PawnKindDef DankPyon_AncientLegionary;
+        public static FactionDef DankPyon_AncientDeadFaction;
     }
 }

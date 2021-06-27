@@ -32,7 +32,7 @@ namespace MedievalOverhaulAncientDead
 				}
 				if (intVec != pawn.Position)
 				{
-					job = JobMaker.MakeJob(JobDefOf.Flee, intVec, danger);
+					job = JobMaker.MakeJob(MO_DefOf.DankPyon_Flee, intVec, danger);
 				}
 				if (job != null)
 				{

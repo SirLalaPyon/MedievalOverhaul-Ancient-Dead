@@ -1,8 +1,10 @@
 ﻿using HarmonyLib;
 using RimWorld;
+using RimWorld.BaseGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
@@ -168,6 +170,139 @@ namespace MedievalOverhaulAncientDead
                 return false;
             }
             return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(SymbolResolver_AncientCryptosleepCasket), "Resolve")]
+    public static class Resolve_Patch
+    {
+        public static void Prefix(out ThingDef __state)
+        {
+            __state = ThingDefOf.AncientCryptosleepCasket;
+            ThingDefOf.AncientCryptosleepCasket = MO_DefOf.DankPyon_AncientSarcophagus;
+        }
+        public static void Postfix(ThingDef __state)
+        {
+            ThingDefOf.AncientCryptosleepCasket = __state;
+        }
+    }
+
+    [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), "GenerateFriendlyAncient")]
+    public static class GenerateFriendlyAncient_Patch
+    {
+        public static bool Prefix(ref Pawn __result)
+        {
+            Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(Rand.Bool ? MO_DefOf.DankPyon_AncientLegionary : MO_DefOf.DankPyon_AncientAuxiliary, 
+                Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1, 
+                forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f, 
+                forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: true));
+            GiveRandomLootInventoryForTombPawn(pawn);
+            __result = pawn;
+            return false;
+        }
+
+        public static void GiveRandomLootInventoryForTombPawn(Pawn p)
+        {
+            if (Rand.Value < 0.65f)
+            {
+                MakeIntoContainer(p.inventory.innerContainer, ThingDefOf.Gold, Rand.Range(10, 50));
+            }
+            else
+            {
+                MakeIntoContainer(p.inventory.innerContainer, ThingDefOf.Plasteel, Rand.Range(10, 50));
+            }
+            if (Rand.Value < 0.7f)
+            {
+                MakeIntoContainer(p.inventory.innerContainer, ThingDefOf.ComponentIndustrial, Rand.Range(-2, 4));
+            }
+            else
+            {
+                MakeIntoContainer(p.inventory.innerContainer, ThingDefOf.ComponentSpacer, Rand.Range(-2, 4));
+            }
+        }
+
+        public static void MakeIntoContainer(ThingOwner container, ThingDef def, int count)
+        {
+            if (count > 0)
+            {
+                Thing thing = ThingMaker.MakeThing(def);
+                thing.stackCount = count;
+                container.TryAdd(thing);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), "GenerateIncappedAncient")]
+    public static class GenerateIncappedAncient_Patch
+    {
+        public static bool Prefix(ref Pawn __result)
+        {
+            Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(Rand.Bool ? MO_DefOf.DankPyon_AncientLegionary : MO_DefOf.DankPyon_AncientAuxiliary,
+                Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1,
+                forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f,
+                forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: true));
+            HealthUtility.DamageUntilDowned(pawn);
+            GenerateFriendlyAncient_Patch.GiveRandomLootInventoryForTombPawn(pawn);
+            __result = pawn;
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), "GenerateAngryAncient")]
+    public static class GenerateAngryAncient_Patch
+    {
+        public static bool Prefix(ref Pawn __result)
+        {
+            Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(Rand.Bool ? MO_DefOf.DankPyon_AncientLegionary : MO_DefOf.DankPyon_AncientAuxiliary,
+                Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1,
+                forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f,
+                forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: true));
+            GenerateFriendlyAncient_Patch.GiveRandomLootInventoryForTombPawn(pawn);
+            __result = pawn;
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), "GenerateHalfEatenAncient")]
+    public static class GenerateHalfEatenAncient_Patch
+    {
+        public static bool Prefix(ref Pawn __result)
+        {
+            Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(Rand.Bool ? MO_DefOf.DankPyon_AncientLegionary : MO_DefOf.DankPyon_AncientAuxiliary,
+                Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1,
+                forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f,
+                forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: true));
+            int num = Rand.Range(6, 10);
+            for (int i = 0; i < num; i++)
+            {
+                pawn.TakeDamage(new DamageInfo(DamageDefOf.Bite, Rand.Range(3, 8), 0f, -1f, pawn));
+            }
+            GenerateFriendlyAncient_Patch.GiveRandomLootInventoryForTombPawn(pawn);
+            __result = pawn;
+            return false;
+        }
+    }
+
+    [HarmonyPatch]
+    public class MechSpawn_Patch
+    {
+        [HarmonyTargetMethods]
+        public static IEnumerable<MethodBase> TargetMethods()
+        {
+            yield return typeof(SymbolResolver_RandomMechanoidGroup).GetNestedTypes(AccessTools.all)
+                                                                 .First(t => t.GetMethods(AccessTools.all)
+                                                                           .Any(mi => mi.ReturnType == typeof(bool) && mi.GetParameters()[0].ParameterType == typeof(PawnKindDef)))
+                                                                 .GetMethods(AccessTools.all)
+                                                                 .First(mi => mi.ReturnType == typeof(bool));
+
+            yield return typeof(MechClusterGenerator).GetNestedTypes(AccessTools.all).MaxBy(t => t.GetMethods(AccessTools.all).Length).GetMethods(AccessTools.all)
+                                                  .First(mi => mi.ReturnType == typeof(bool) && mi.GetParameters()[0].ParameterType == typeof(PawnKindDef));
+        }
+
+        [HarmonyPostfix]
+        public static void Postfix(PawnKindDef __0, ref bool __result)
+        {
+            __result = !__0.RaceProps.IsMechanoid;
         }
     }
 }

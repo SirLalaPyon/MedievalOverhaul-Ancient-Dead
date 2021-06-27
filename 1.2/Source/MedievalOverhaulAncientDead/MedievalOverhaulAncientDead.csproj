@@ -47,6 +47,7 @@
     <Compile Include="Gas_GreenFog.cs" />
     <Compile Include="CompAbilityEffect_SpawnGreenFog.cs" />
     <Compile Include="JobGiver_Flee.cs" />
+    <Compile Include="JobDriver_Flee.cs" />
     <Compile Include="MO_Utils.cs" />
     <Compile Include="MO_DefOf.cs" />
     <Compile Include="HarmonyPatches.cs" />
