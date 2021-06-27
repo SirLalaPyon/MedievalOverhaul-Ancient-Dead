@@ -16,11 +16,11 @@ namespace MedievalOverhaulAncientDead
 			if (target.HasThing)
 			{
 				base.Apply(target, dest);
-				if (Rand.Chance(0.5f))
+				if (Rand.Chance(1f))
                 {
 					Predicate<Pawn> predicate = delegate (Pawn x)
 					{
-						if (x.story.traits != null)
+						if (x.story?.traits != null)
 						{
 							var nerves = x.story.traits.GetTrait(TraitDefOf.Nerves);
 							if (nerves != null && nerves.Degree == 2)
@@ -31,41 +31,16 @@ namespace MedievalOverhaulAncientDead
 						return true;
 					};
 					var pawns = GenRadial.RadialDistinctThingsAround(target.Cell, this.parent.pawn.Map, 15f, true).OfType<Pawn>()
-						.Where(x => predicate(x) && x.Faction.HostileTo(this.parent.pawn.Faction)).Take(2);
+						.Where(x => predicate(x) && x.Faction is null || x.Faction.HostileTo(this.parent.pawn.Faction)).Take(2);
 					foreach (var pawn in pawns)
 					{
-						MakeFlee(pawn, this.parent.pawn, 25, new List<Thing> { this.parent.pawn });
+						pawn.mindState.mentalStateHandler.TryStartMentalState(MO_DefOf.DankPyon_PanicFlee);
+						Log.Message(pawn + " is fleeing");
 					}
                 }
 			}
 		}
 
-		public void MakeFlee(Pawn pawn, Thing danger, int radius, List<Thing> dangers)
-		{
-			Job job = null;
-			IntVec3 intVec;
-			if (pawn.CurJob != null && pawn.CurJob.def == JobDefOf.Flee)
-			{
-				intVec = pawn.CurJob.targetA.Cell;
-			}
-			else
-			{
-				intVec = CellFinderLoose.GetFleeDest(pawn, dangers, 24f);
-			}
 
-			if (intVec == pawn.Position)
-			{
-				intVec = GenRadial.RadialCellsAround(pawn.Position, radius, radius * 2).RandomElement();
-			}
-			if (intVec != pawn.Position)
-			{
-				job = JobMaker.MakeJob(JobDefOf.Flee, intVec, danger);
-			}
-			if (job != null)
-			{
-				job.expiryInterval = 5 * 60;
-				pawn.jobs.TryTakeOrderedJob(job);
-			}
-		}
 	}
 }

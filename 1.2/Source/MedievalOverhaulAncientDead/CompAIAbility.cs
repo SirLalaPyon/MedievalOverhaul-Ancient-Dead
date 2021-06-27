@@ -8,24 +8,6 @@ using Verse;
 
 namespace MedievalOverhaulAncientDead
 {
-    public enum AbilityAttackOrder
-    {
-        Sequence,
-        RandomByWeight,
-        Random
-    }
-    public class AbilityAction
-    {
-        public AbilityDef abilityDef;
-        public int cooldownTicks;
-        public FloatRange? targetDistanceRange;
-        public float weight;
-    }
-    public class AbilityAIController : DefModExtension
-    {
-        public AbilityAttackOrder abilityAttackOrder;
-        public List<AbilityAction> abilityActions;
-    }
     public class CompProperties_AIAbility : CompProperties
     {
         public CompProperties_AIAbility()
@@ -109,8 +91,8 @@ namespace MedievalOverhaulAncientDead
         public void UseAbilityOn(Ability ability, LocalTargetInfo targetInfo)
         {
             var abilityAction = AbilityAIController.abilityActions.FirstOrDefault(x => x.abilityDef == ability.def);
-            lastPerformedAbilityInd = AbilityAIController.abilityActions.IndexOf(abilityAction);
             ability.Activate(targetInfo, targetInfo);
+            Log.Message("using " + ability.def + " on " + targetInfo.Thing);
             SetCooldown(ability.def, abilityAction.cooldownTicks);
         }
         public void SetCooldown(AbilityDef key, int toTickCooldown)

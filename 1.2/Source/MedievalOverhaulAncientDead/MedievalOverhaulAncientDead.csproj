@@ -42,9 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompAbilityEffect_Horror.cs" />
+    <Compile Include="AbilityAIController.cs" />
     <Compile Include="CompAIAbility.cs" />
     <Compile Include="Gas_GreenFog.cs" />
     <Compile Include="CompAbilityEffect_SpawnGreenFog.cs" />
+    <Compile Include="JobGiver_Flee.cs" />
+    <Compile Include="MO_Utils.cs" />
     <Compile Include="MO_DefOf.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

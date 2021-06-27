@@ -15,5 +15,6 @@ namespace MedievalOverhaulAncientDead
         public static FleshTypeDef DankPyon_AncientDead;
         public static DamageDef DankPyon_ToxicBurn;
         public static ThingDef DankPyon_GreenFog;
+        public static MentalStateDef DankPyon_PanicFlee;
     }
 }

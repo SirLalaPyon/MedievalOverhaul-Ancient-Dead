@@ -1,10 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <RulePackDef>
+    <defName>DankPyon_AncientDeadRaceName</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name->Ancient</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+  
 	<AlienRace.ThingDef_AlienRace ParentName="BasePawn">
 		<defName>DankPyon_AncientDeadRace</defName>
 		<label>Ancient Dead</label>
 		<description>PLACEHOLDER Many hundred years ago, in a different era, an empire of man spanned much of the known world. What has fallen into ruin now, what was abandoned to nature and beast, what has long been forgotten, all this was that of man once. An empire, not of petty noble houses, but one of a dozen provinces, from the frozen tundra of the north to the blistering sands of the south, of a dozen peoples under one banner.</description>
+		<inspectorTabs Inherit="False">
+			<li>ITab_Pawn_Health</li>
+			<li>ITab_Pawn_Training</li>
+			<li>ITab_Pawn_Gear</li>
+			<li>ITab_Pawn_Log</li>
+		</inspectorTabs>
 		<!--=============================================================================================================================-->
 		<statBases>
 			<MarketValue>1500</MarketValue>
@@ -145,14 +160,13 @@
 			<fleshType>DankPyon_AncientDead</fleshType>
 			<useMeatFrom>Human</useMeatFrom>
 			<useLeatherFrom>Human</useLeatherFrom>
-			<!--nameCategory>HumanStandard</nameCategory-->
 			<body>DankPyon_AncientDeadBody</body>
 			<hasGenders>false</hasGenders>
-			<deathActionWorkerClass>DeathActionWorker_SmallExplosion</deathActionWorkerClass>
 			<needsRest>false</needsRest>
 			<baseBodySize>1</baseBodySize>
 			<baseHealthScale>0.6</baseHealthScale>
 			<foodType>None</foodType>
+			<nameGenerator>DankPyon_AncientDeadRaceName</nameGenerator>
 			<gestationPeriodDays>9999</gestationPeriodDays>
 			<manhunterOnDamageChance>0.60</manhunterOnDamageChance>
 			<manhunterOnTameFailChance>0.04</manhunterOnTameFailChance>

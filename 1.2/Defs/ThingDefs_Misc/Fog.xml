@@ -3,12 +3,12 @@
 
   	<ThingDef ParentName="BaseGas">
 		<defName>DankPyon_GreenFog</defName>
-		<label>smoke</label>
+		<label>miasma</label>
 		<thingClass>MedievalOverhaulAncientDead.Gas_GreenFog</thingClass>
 		<graphicData>
 			<texPath>Things/Gas/Puff</texPath>
 			<drawSize>7</drawSize>
-			<color>(0,128,0)</color>
+			<color>(119,107,57)</color>
 		</graphicData>
 		<size>(7, 7)</size>
 		<pathCost>100</pathCost>

@@ -13,7 +13,7 @@ namespace MedievalOverhaulAncientDead
         public override void Tick()
         {
             base.Tick();
-            if (this.Map != null && Find.TickManager.TicksGame % Rand.RangeInclusive(40, 80) == 0)
+            if (this.Map != null && Find.TickManager.TicksGame % Rand.RangeInclusive(280, 320) == 0)
             {
                 foreach (var pos in GenRadial.RadialCellsAround(this.Position, 5f, true))
                 {

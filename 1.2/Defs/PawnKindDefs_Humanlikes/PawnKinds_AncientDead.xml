@@ -76,6 +76,7 @@
     <minGenerationAge>500</minGenerationAge>
 	<modExtensions>
 		<li Class="MedievalOverhaulAncientDead.AbilityAIController">
+			<dontEngangeInMelee>true</dontEngangeInMelee>
 			<abilityAttackOrder>Sequence</abilityAttackOrder>
 			<abilityActions>
 				<li>
