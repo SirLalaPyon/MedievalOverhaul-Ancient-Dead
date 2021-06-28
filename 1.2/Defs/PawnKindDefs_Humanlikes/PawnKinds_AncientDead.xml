@@ -9,7 +9,7 @@
     <isFighter>true</isFighter>
     <gearHealthRange>0.6~2</gearHealthRange>
     <forceNormalGearQuality>true</forceNormalGearQuality>
-    <defaultFactionType>AncientsHostile</defaultFactionType>
+    <defaultFactionType>DankPyon_AncientDeadFaction</defaultFactionType>
     <backstoryCategories>
       <li>Outlander</li>
     </backstoryCategories>
@@ -34,7 +34,7 @@
     <isFighter>true</isFighter>
     <gearHealthRange>0.6~2</gearHealthRange>
     <forceNormalGearQuality>true</forceNormalGearQuality>
-    <defaultFactionType>AncientsHostile</defaultFactionType>
+    <defaultFactionType>DankPyon_AncientDeadFaction</defaultFactionType>
     <backstoryCategories>
       <li>Outlander</li>
     </backstoryCategories>
@@ -59,7 +59,7 @@
     <isFighter>true</isFighter>
     <gearHealthRange>0.6~2</gearHealthRange>
     <forceNormalGearQuality>true</forceNormalGearQuality>
-    <defaultFactionType>AncientsHostile</defaultFactionType>
+    <defaultFactionType>DankPyon_AncientDeadFaction</defaultFactionType>
     <backstoryCategories>
       <li>Outlander</li>
     </backstoryCategories>

@@ -5,7 +5,7 @@
     <defName>DankPyon_AncientDeadRaceName</defName>
     <rulePack>
       <rulesStrings>
-        <li>r_name->Ancient</li>
+        <li>r_name->Ancient Dead</li>
       </rulesStrings>
     </rulePack>
   </RulePackDef>
