@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using RimWorld;
 using RimWorld.BaseGen;
+using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -173,20 +174,6 @@ namespace MedievalOverhaulAncientDead
         }
     }
 
-    [HarmonyPatch(typeof(SymbolResolver_AncientCryptosleepCasket), "Resolve")]
-    public static class Resolve_Patch
-    {
-        public static void Prefix(out ThingDef __state)
-        {
-            __state = ThingDefOf.AncientCryptosleepCasket;
-            ThingDefOf.AncientCryptosleepCasket = MO_DefOf.DankPyon_AncientSarcophagus;
-        }
-        public static void Postfix(ThingDef __state)
-        {
-            ThingDefOf.AncientCryptosleepCasket = __state;
-        }
-    }
-
     [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), "GenerateFriendlyAncient")]
     public static class GenerateFriendlyAncient_Patch
     {
@@ -203,22 +190,7 @@ namespace MedievalOverhaulAncientDead
 
         public static void GiveRandomLootInventoryForTombPawn(Pawn p)
         {
-            if (Rand.Value < 0.65f)
-            {
-                MakeIntoContainer(p.inventory.innerContainer, ThingDefOf.Gold, Rand.Range(10, 50));
-            }
-            else
-            {
-                MakeIntoContainer(p.inventory.innerContainer, ThingDefOf.Plasteel, Rand.Range(10, 50));
-            }
-            if (Rand.Value < 0.7f)
-            {
-                MakeIntoContainer(p.inventory.innerContainer, ThingDefOf.ComponentIndustrial, Rand.Range(-2, 4));
-            }
-            else
-            {
-                MakeIntoContainer(p.inventory.innerContainer, ThingDefOf.ComponentSpacer, Rand.Range(-2, 4));
-            }
+            MakeIntoContainer(p.inventory.innerContainer, ThingDefOf.Silver, Rand.Range(10, 50));
         }
 
         public static void MakeIntoContainer(ThingOwner container, ThingDef def, int count)
@@ -303,6 +275,71 @@ namespace MedievalOverhaulAncientDead
         public static void Postfix(PawnKindDef __0, ref bool __result)
         {
             __result = !__0.RaceProps.IsMechanoid;
+        }
+    }
+
+    [HarmonyPatch(typeof(SymbolResolver_SinglePawn), "Resolve")]
+    public static class Resolve_SinglePawn_Patch
+    {
+        public static bool Prefix(SymbolResolver_SinglePawn __instance, ResolveParams rp)
+        {
+            if (rp.faction == Faction.OfMechanoids)
+            {
+                Log.Message("Preventing SymbolResolver_SinglePawn");
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(SymbolResolver_AncientCryptosleepCasket), "Resolve")]
+    public static class Resolve_SymbolResolver_AncientCryptosleepCasket_Patch
+    {
+        public static bool Prefix(SymbolResolver_AncientCryptosleepCasket __instance, ResolveParams rp)
+        {
+            PodContentsType value = rp.podContentsType ?? Gen.RandomEnumValue<PodContentsType>(disallowFirstValue: true);
+            Rot4 rot = rp.thingRot ?? Rot4.North;
+            Building_Sarcophagus building_AncientCryptosleepCasket = (Building_Sarcophagus)ThingMaker.MakeThing(MO_DefOf.DankPyon_AncientSarcophagus);
+            ThingSetMakerParams parms = default(ThingSetMakerParams);
+            parms.podContentsType = value;
+            List<Thing> list = ThingSetMakerDefOf.MapGen_AncientPodContents.root.Generate(parms);
+            for (int i = 0; i < list.Count; i++)
+            {
+                building_AncientCryptosleepCasket.GetStoreSettings().filter.SetAllowAll(null);
+                Log.Message("building_AncientCryptosleepCasket: " + building_AncientCryptosleepCasket.Accepts(list[i]));
+                if (!building_AncientCryptosleepCasket.TryAcceptThing(list[i], allowSpecialEffects: false))
+                {
+                    Log.Error("Can't accept " + list[i]);
+                    Pawn pawn = list[i] as Pawn;
+                    if (pawn != null)
+                    {
+                        Find.WorldPawns.PassToWorld(pawn, PawnDiscardDecideMode.Discard);
+                    }
+                    else
+                    {
+                        list[i].Destroy();
+                    }
+                }
+                else
+                {
+                    Log.Error("Accept " + list[i]);
+                }
+            }
+            GenSpawn.Spawn(building_AncientCryptosleepCasket, rp.rect.RandomCell, BaseGen.globalSettings.map, rot);
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(Pawn), "SpawnSetup")]
+    public static class SpawnSetup_Patch
+    {
+        public static void Postfix(Pawn __instance)
+        {
+            if (__instance.Faction != null)
+            {
+                Log.Message("Spawning " + __instance);
+                Log.ResetMessageCount();
+            }
         }
     }
 }
