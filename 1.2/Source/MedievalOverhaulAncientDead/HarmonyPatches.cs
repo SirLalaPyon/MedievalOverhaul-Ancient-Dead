@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Verse;
 
 namespace MedievalOverhaulAncientDead
@@ -97,9 +98,6 @@ namespace MedievalOverhaulAncientDead
                 {
                     pawn.psychicEntropy = new Pawn_PsychicEntropyTracker(pawn);
                 }
-                pawn.skills.GetSkill(SkillDefOf.Melee).levelInt = 12;
-                pawn.skills.GetSkill(SkillDefOf.Shooting).levelInt = 12;
-                pawn.story.adulthood = null;
             }
         }
     }
@@ -179,9 +177,9 @@ namespace MedievalOverhaulAncientDead
     {
         public static bool Prefix(ref Pawn __result)
         {
-            Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(Rand.Bool ? MO_DefOf.DankPyon_AncientLegionary : MO_DefOf.DankPyon_AncientAuxiliary, 
-                Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1, 
-                forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f, 
+            Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(Rand.Bool ? MO_DefOf.DankPyon_AncientLegionary : MO_DefOf.DankPyon_AncientAuxiliary,
+                Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1,
+                forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f,
                 forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: true));
             GiveRandomLootInventoryForTombPawn(pawn);
             __result = pawn;
@@ -306,23 +304,9 @@ namespace MedievalOverhaulAncientDead
             for (int i = 0; i < list.Count; i++)
             {
                 building_AncientCryptosleepCasket.GetStoreSettings().filter.SetAllowAll(null);
-                Log.Message("building_AncientCryptosleepCasket: " + building_AncientCryptosleepCasket.Accepts(list[i]));
                 if (!building_AncientCryptosleepCasket.TryAcceptThing(list[i], allowSpecialEffects: false))
                 {
-                    Log.Error("Can't accept " + list[i]);
-                    Pawn pawn = list[i] as Pawn;
-                    if (pawn != null)
-                    {
-                        Find.WorldPawns.PassToWorld(pawn, PawnDiscardDecideMode.Discard);
-                    }
-                    else
-                    {
-                        list[i].Destroy();
-                    }
-                }
-                else
-                {
-                    Log.Error("Accept " + list[i]);
+                    GenPlace.TryPlaceThing(list[i], rp.rect.RandomCell, BaseGen.globalSettings.map, ThingPlaceMode.Near);
                 }
             }
             GenSpawn.Spawn(building_AncientCryptosleepCasket, rp.rect.RandomCell, BaseGen.globalSettings.map, rot);
@@ -335,11 +319,80 @@ namespace MedievalOverhaulAncientDead
     {
         public static void Postfix(Pawn __instance)
         {
-            if (__instance.Faction != null)
+            if (__instance.def == MO_DefOf.DankPyon_AncientDeadRace)
             {
-                Log.Message("Spawning " + __instance);
-                Log.ResetMessageCount();
+                __instance.skills.GetSkill(SkillDefOf.Melee).levelInt = 12;
+                __instance.skills.GetSkill(SkillDefOf.Shooting).levelInt = 12;
+                __instance.story.adulthood = null;
+                __instance.story.traits.allTraits.Clear();
             }
         }
     }
+
+    [HarmonyPatch(typeof(ITab_Pawn_Character), "IsVisible", MethodType.Getter)]
+    public static class IsVisible_Patch
+    {
+        public static void Postfix(ITab_Pawn_Character __instance, ref bool __result)
+        {
+            var pawn = PawnToShowInfoAbout();
+            if (pawn != null && pawn.def == MO_DefOf.DankPyon_AncientDeadRace)
+            {
+                __result = false;
+            }
+        }
+
+        private static Pawn PawnToShowInfoAbout()
+        {
+            Pawn pawn = Find.Selector.SingleSelectedThing as Pawn;
+            if (pawn is null && Find.Selector.SingleSelectedThing is Corpse corpse)
+            {
+                if (corpse != null)
+                {
+                    pawn = corpse.InnerPawn;
+                }
+            }
+            if (pawn == null)
+            {
+                return null;
+            }
+            return pawn;
+        }
+    }
+
+    [HarmonyPatch(typeof(FloatMenuMakerMap), "AddHumanlikeOrders")]
+    public static class AddHumanlikeOrders_Patch
+    {
+        public static void Postfix(Vector3 clickPos, Pawn pawn, ref List<FloatMenuOption> opts)
+        {
+            IntVec3 c = IntVec3.FromVector3(clickPos);
+            if (pawn.equipment != null)
+            {
+                List<Thing> thingList = c.GetThingList(pawn.Map);
+                for (int i = 0; i < thingList.Count; i++)
+                {
+                    if (thingList[i] is Pawn victim && victim.def == MO_DefOf.DankPyon_AncientDeadRace)
+                    {
+                        TaggedString toCheck = "Capture".Translate(victim.LabelCap, victim);
+                        FloatMenuOption floatMenuOption = opts.FirstOrDefault((FloatMenuOption x) => x.Label.Contains(toCheck));
+                        if (floatMenuOption != null)
+                        {
+                            opts.Remove(floatMenuOption);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    [HarmonyPatch(typeof(Building_Grave), "HasCorpse", MethodType.Getter)]
+    public static class HasCorpse_Patch
+    {
+        public static void Postfix(Building_Grave __instance, ref bool __result)
+        {
+            if (__instance is Building_AncientSarcophagus ancientSarcophagus && ancientSarcophagus.Ancient != null)
+            {
+                __result = true;
+            }
+        }
+    }
+
 }

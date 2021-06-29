@@ -11,7 +11,7 @@
     <forceNormalGearQuality>true</forceNormalGearQuality>
     <defaultFactionType>DankPyon_AncientDeadFaction</defaultFactionType>
     <backstoryCategories>
-      <li>Outlander</li>
+      <li>DankPyon_Ancient</li>
     </backstoryCategories>
     <apparelTags>
       <li>AncientAuxiliary</li>
@@ -36,7 +36,7 @@
     <forceNormalGearQuality>true</forceNormalGearQuality>
     <defaultFactionType>DankPyon_AncientDeadFaction</defaultFactionType>
     <backstoryCategories>
-      <li>Outlander</li>
+      <li>DankPyon_Ancient</li>
     </backstoryCategories>
     <apparelTags>
       <li>AncientLegionary</li>
@@ -61,7 +61,7 @@
     <forceNormalGearQuality>true</forceNormalGearQuality>
     <defaultFactionType>DankPyon_AncientDeadFaction</defaultFactionType>
     <backstoryCategories>
-      <li>Outlander</li>
+      <li>DankPyon_Ancient</li>
     </backstoryCategories>
     <apparelTags>
       <li>AncientPriest</li>

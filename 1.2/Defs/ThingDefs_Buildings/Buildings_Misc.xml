@@ -6,7 +6,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>DankPyon_AncientSarcophagus</defName>
     <label>ancient sarcophagus</label>
-    <thingClass>Building_Sarcophagus</thingClass>
+    <thingClass>MedievalOverhaulAncientDead.Building_AncientSarcophagus</thingClass>
     <description>An ancient grave with the sheen of the dark upon it, putting midnight to shame. Time has worn away whatever intricate carves may have ever graced the memorial, though it has only worsened the stench of decay that lingers around it. What few stories exist tell of a legion of guardian dead that emerges, whose prime imperative is to protect the sarcophagus's contents. That those folk tales never take mention of the riches within implies the fate of all living things.</description>
     <graphicData>
       <texPath>Building/AncientSarcophagus</texPath>

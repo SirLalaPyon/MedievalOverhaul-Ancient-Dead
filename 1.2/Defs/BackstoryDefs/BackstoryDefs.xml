@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<AlienRace.BackstoryDef>
+		<defName>DankPyon_Ancient</defName>
+		<title>Ancient</title>
+		<titleShort>Ancient</titleShort>
+		<baseDescription>Ancient</baseDescription>
+		<slot>Childhood</slot>
+		<spawnCategories>
+			<li>DankPyon_Ancient</li>
+		</spawnCategories>
+		<workDisables>
+			<li>AllWork</li>
+		</workDisables>
+	</AlienRace.BackstoryDef>
+	
+	<AlienRace.BackstoryDef>
+		<defName>DankPyon_AncientAdulthood</defName>
+		<title>Ancient</title>
+		<titleShort>Ancient</titleShort>
+		<baseDescription>Ancient</baseDescription>
+		<slot>Adulthood</slot>
+		<spawnCategories>
+			<li>DankPyon_Ancient</li>
+		</spawnCategories>
+		<workDisables>
+			<li>AllWork</li>
+		</workDisables>
+	</AlienRace.BackstoryDef>
+</Defs>
