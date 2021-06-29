@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 
 namespace MedievalOverhaulAncientDead
 {
@@ -211,7 +212,6 @@ namespace MedievalOverhaulAncientDead
                 Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1,
                 forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f,
                 forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: true));
-            HealthUtility.DamageUntilDowned(pawn);
             GenerateFriendlyAncient_Patch.GiveRandomLootInventoryForTombPawn(pawn);
             __result = pawn;
             return false;
@@ -242,17 +242,43 @@ namespace MedievalOverhaulAncientDead
                 Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1,
                 forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f,
                 forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: true));
-            int num = Rand.Range(6, 10);
-            for (int i = 0; i < num; i++)
-            {
-                pawn.TakeDamage(new DamageInfo(DamageDefOf.Bite, Rand.Range(3, 8), 0f, -1f, pawn));
-            }
             GenerateFriendlyAncient_Patch.GiveRandomLootInventoryForTombPawn(pawn);
             __result = pawn;
             return false;
         }
     }
 
+    [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), "GenerateScarabs")]
+    public static class GenerateScarabs_Patch
+    {
+        public static bool Prefix(ref List<Thing> __result)
+        {
+            __result = new List<Thing>();
+            int num = Rand.Range(3, 6);
+            for (int i = 0; i < num; i++)
+            {
+                Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(MO_DefOf.DankPyon_AncientAuxiliary,
+                    Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1,
+                    forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f,
+                    forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: true));
+                __result.Add(pawn);
+            }
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), "GenerateSlave")]
+    public static class GenerateSlave_Patch
+    {
+        public static bool Prefix(ref Pawn __result)
+        {
+            __result = PawnGenerator.GeneratePawn(new PawnGenerationRequest(MO_DefOf.DankPyon_AncientAuxiliary,
+                Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction), PawnGenerationContext.NonPlayer, -1,
+                forceGenerateNewPawn: false, newborn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: false, mustBeCapableOfViolence: true, 1f,
+                forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: true));
+            return false;
+        }
+    }
     [HarmonyPatch]
     public class MechSpawn_Patch
     {
@@ -295,22 +321,87 @@ namespace MedievalOverhaulAncientDead
     {
         public static bool Prefix(SymbolResolver_AncientCryptosleepCasket __instance, ResolveParams rp)
         {
+            int groupID = rp.ancientCryptosleepCasketGroupID ?? Find.UniqueIDsManager.GetNextAncientCryptosleepCasketGroupID();
+
             PodContentsType value = rp.podContentsType ?? Gen.RandomEnumValue<PodContentsType>(disallowFirstValue: true);
             Rot4 rot = rp.thingRot ?? Rot4.North;
-            Building_Sarcophagus building_AncientCryptosleepCasket = (Building_Sarcophagus)ThingMaker.MakeThing(MO_DefOf.DankPyon_AncientSarcophagus);
+            Building_AncientSarcophagus building_AncientCryptosleepCasket = (Building_AncientSarcophagus)ThingMaker.MakeThing(MO_DefOf.DankPyon_AncientSarcophagus);
+            building_AncientCryptosleepCasket.groupID = groupID;
             ThingSetMakerParams parms = default(ThingSetMakerParams);
             parms.podContentsType = value;
             List<Thing> list = ThingSetMakerDefOf.MapGen_AncientPodContents.root.Generate(parms);
             for (int i = 0; i < list.Count; i++)
             {
-                building_AncientCryptosleepCasket.GetStoreSettings().filter.SetAllowAll(null);
                 if (!building_AncientCryptosleepCasket.TryAcceptThing(list[i], allowSpecialEffects: false))
                 {
                     GenPlace.TryPlaceThing(list[i], rp.rect.RandomCell, BaseGen.globalSettings.map, ThingPlaceMode.Near);
                 }
             }
+            var faction = Find.FactionManager.FirstFactionOfDef(MO_DefOf.DankPyon_AncientDeadFaction);
             GenSpawn.Spawn(building_AncientCryptosleepCasket, rp.rect.RandomCell, BaseGen.globalSettings.map, rot);
+            var pawns = list.OfType<Pawn>().Where(x => x.Faction == faction);
+            if (pawns.Any())
+            {
+                bool foundLord = false;
+                var lords = BaseGen.globalSettings.map.lordManager.lords.Where(x => x.LordJob is LordJob_DefendPoint defend && x.faction == faction);
+                if (lords.Any())
+                {
+                    foreach (var lord in lords)
+                    {
+                        var defend = lord.LordJob as LordJob_DefendPoint;
+                        var point = Traverse.Create(defend).Field("point").GetValue<IntVec3>();
+                        if (rp.rect.Cells.Any(y => y.GetRoom(BaseGen.globalSettings.map) == point.GetRoom(BaseGen.globalSettings.map)))
+                        {
+                            AssignPawns(lord, pawns);
+                            foundLord = true;
+                        }
+                        else
+                        {
+                            Log.Message("Didn't found a point for " + lord.LordJob + " - " + point);
+                        }
+                    }
+                }
+                if (!foundLord)
+                {
+                    var point = rp.rect.RandomElement();
+                    LordMaker.MakeNewLord(faction, new LordJob_DefendPoint(point, 6, false, false), BaseGen.globalSettings.map, pawns);
+                }
+            }
             return false;
+        }
+
+        private static void AssignPawns(Lord lord, IEnumerable<Pawn> pawns)
+        {
+            foreach (var pawn in pawns)
+            {
+                lord.AddPawn(pawn);
+            }
+        }
+    }
+    [HarmonyPatch(typeof(SymbolResolver_Interior_AncientTemple), "Resolve")]
+    public static class SymbolResolver_Interior_AncientTemple_Patch
+    {
+        public static bool preventHives;
+        public static void Prefix()
+        {
+            preventHives = true;
+        }
+        public static void Postfix()
+        {
+            preventHives = false;
+        }
+    }
+
+    [HarmonyPatch(typeof(SymbolStack), "Push", new Type[] {typeof(string), typeof(ResolveParams), typeof(string) })]
+    public static class SymbolStack_Patch
+    {
+        public static bool Prefix(string symbol, ResolveParams resolveParams, string customNameForPath = null)
+        {
+            if (symbol == "hives" && SymbolResolver_Interior_AncientTemple_Patch.preventHives)
+            {
+                return false;
+            }
+            return true;
         }
     }
 
